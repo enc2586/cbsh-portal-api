@@ -20,12 +20,14 @@ def root():
 
 
 @app.route('/legacySelfLearn/credentialValidity', methods=['POST'])
-def checkIfCredentialValid(id, password):
+def checkIfCredentialValid():
+    userData = {
+        "id": flask.request.json['id'],
+        "password": flask.request.json['password']
+    }
+
     with req.session() as sess:
-        res = sess.post(SIGNIN_URL, data={
-            "id": id,
-            "password": password
-        })
+        res = sess.post(SIGNIN_URL, data=userData)
         rawPage = BeautifulSoup(res.content.decode('utf-8'), "html.parser")
 
         if cleanUp(rawPage.li.get_text()) == "선생님은 가입해주세요.":
