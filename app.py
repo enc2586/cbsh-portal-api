@@ -61,7 +61,7 @@ def applySelfLearn():
     body = flask.request.json
 
     if flask.request.method == 'PUT':
-        if not all(item in body.keys() for item in ["id", "password", "homeRoomTeacherCode", "conductingTeacherCode", "classroomCode", "period"]):
+        if not all(item in body.keys() for item in ["id", "password", "homeRoomTeacherCode", "conductingTeacherCode", "classroomCode", "periods"]):
             return flask.make_response("Invalid request body.", 400)
 
         userData = {
