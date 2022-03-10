@@ -31,7 +31,7 @@ def checkIfCredentialValid():
         rawPage = BeautifulSoup(res.content.decode('utf-8'), "html.parser")
 
         if cleanUp(rawPage.li.get_text()) == "선생님은 가입해주세요.":
-            return False
+            return json.dumps(False)
 
         else:
-            return True
+            return json.dumps(True)
