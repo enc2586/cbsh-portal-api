@@ -32,24 +32,24 @@ def root():
     return "Hello, world!"
 
 
-# @app.route('/legacySelfLearn/credentialValidity', methods=['POST'])
-# def applySelfLearn():
-#     body = flask.request.json
+@app.route('/legacySelfLearn/credentialValidity', methods=['POST'])
+def applySelfLearn():
+    body = flask.request.json
 
-#     userData = {
-#         "id": body['id'],
-#         "password": body['password']
-#     }
+    userData = {
+        "id": body['id'],
+        "password": body['password']
+    }
 
-#     with req.session() as sess:
-#         res = sess.post(SIGNIN_URL, data=userData)
-#         rawPage = BeautifulSoup(res.content.decode('utf-8'), "html.parser")
+    with req.session() as sess:
+        res = sess.post(SIGNIN_URL, data=userData)
+        rawPage = BeautifulSoup(res.content.decode('utf-8'), "html.parser")
 
-#         if cleanUp(rawPage.li.get_text()) == "선생님은 가입해주세요.":
-#             return json.dumps(False)
+        if cleanUp(rawPage.li.get_text()) == "선생님은 가입해주세요.":
+            return json.dumps(False)
 
-#         else:
-#             return json.dumps(True)
+        else:
+            return json.dumps(True)
 
 
 @app.route('/legacySelfLearn/selfLearn', methods=['PUT'])
@@ -75,7 +75,7 @@ def applySelfLearn():
         rawPage = BeautifulSoup(res.content.decode('utf-8'), "html.parser")
 
         if cleanUp(rawPage.li.get_text()) == "선생님은 가입해주세요.":
-            return "Failed to log in", 400
+            return flask.make_response("Record not found", 400)
 
         else:
             result = []
@@ -110,7 +110,7 @@ def deleteSelfLearn():
         rawPage = BeautifulSoup(res.content.decode('utf-8'), "html.parser")
 
         if cleanUp(rawPage.li.get_text()) == "선생님은 가입해주세요.":
-            return "Failed to log in", 400
+            return flask.make_response("Record not found", 400)
 
         else:
             result = []
