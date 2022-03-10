@@ -36,7 +36,7 @@ def root():
     return json.dumps(True)
 
 
-@app.route('/legacySelfLearn/credentialValidity', methods=['POST'])
+@app.route('/legacySelfLearn/credentialValidity', methods=['GET'])
 def checkCredentialValidity():
     body = flask.request.json
 
