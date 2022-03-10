@@ -8,7 +8,7 @@ from bs4 import BeautifulSoup
 
 SIGNIN_URL = "http://academic.petapop.com/sign/actionLogin.do"
 APPLY_URL = "http://academic.petapop.com/self/requestSelfLrn.do"
-CANCEL_URL = "http://academic.petapop.com/self/deleteSelfLrn.do"
+DELETE_URL = "http://academic.petapop.com/self/deleteSelfLrn.do"
 
 KST = pytz.timezone('Asia/Seoul')
 
@@ -91,7 +91,7 @@ def applySelfLearn():
                     result.append(response['slrnNo'])
 
                 else:
-                    result.append(-1)
+                    result.append(False)
 
             return result
 
@@ -116,13 +116,16 @@ def deleteSelfLearn():
             result = []
 
             for serial in body['target']:
-                res = sess.post(APPLY_URL, data=applyCaseData)
+                deleteData = {
+                    "slrnNo": serial,
+                }
+                res = sess.post(DELETE_URL, data=deleteData)
                 response = json.loads(res.content.decode('utf-8'))
 
                 if response['result']['success'] == True:
-                    result.append(response['slrnNo'])
+                    result.append(True)
 
                 else:
-                    result.append(-1)
+                    result.append(False)
 
             return result
