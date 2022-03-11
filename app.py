@@ -36,7 +36,7 @@ def root():
     return json.dumps(True)
 
 
-@app.route('/legacySelfLearn/credentialValidity', methods=['GET'])
+@app.route('/legacySelfLearn/credentialValidity', methods=['POST'])
 def checkCredentialValidity():
     body = flask.request.json
 
@@ -145,7 +145,7 @@ def applySelfLearn():
                 return json.dumps(result)
 
 
-@app.route('/legacySelfLearn/teacherCodes', methods=['GET'])
+@app.route('/legacySelfLearn/teacherCodes', methods=['POST'])
 def getTeacherCodes():
     body = flask.request.json
 
@@ -181,7 +181,7 @@ def getTeacherCodes():
             return json.dumps(teacherData)
 
 
-@app.route('/legacySelfLearn/classDatas', methods=['GET'])
+@app.route('/legacySelfLearn/classDatas', methods=['POST'])
 def getClassDatas():
     body = flask.request.json
 
